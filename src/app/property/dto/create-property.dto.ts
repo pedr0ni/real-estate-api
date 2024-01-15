@@ -1,11 +1,16 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsArray, IsNotEmpty, IsString, IsUrl} from 'class-validator';
+import {IsArray, IsNotEmpty, IsNumber, IsString, IsUrl} from 'class-validator';
 
 export class CreatePropertyDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   title: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  size: number;
 
   @ApiProperty()
   @IsNotEmpty()

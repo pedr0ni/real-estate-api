@@ -10,8 +10,10 @@ import {
 import {PropertyService} from './property.service';
 import {CreatePropertyDto} from './dto/create-property.dto';
 import {UpdatePropertyDto} from './dto/update-property.dto';
+import {ApiBody, ApiTags} from '@nestjs/swagger';
 
 @Controller('property')
+@ApiTags('property')
 export class PropertyController {
   constructor(private readonly propertyService: PropertyService) {}
 
@@ -30,11 +32,9 @@ export class PropertyController {
     return this.propertyService.findOne(id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePropertyDto: UpdatePropertyDto
-  ) {
+  @Patch()
+  @ApiBody({type: UpdatePropertyDto})
+  update(@Body() updatePropertyDto: UpdatePropertyDto) {
     return this.propertyService.update(updatePropertyDto);
   }
 

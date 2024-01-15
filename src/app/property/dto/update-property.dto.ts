@@ -1,11 +1,63 @@
-import {PartialType} from '@nestjs/mapped-types';
-import {CreatePropertyDto} from './create-property.dto';
 import {ApiProperty} from '@nestjs/swagger';
-import {IsMongoId, IsNotEmpty} from 'class-validator';
+import {
+  IsArray,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
-export class UpdatePropertyDto extends PartialType(CreatePropertyDto) {
+export class UpdatePropertyDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsMongoId()
-  id: string;
+  _id: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  size?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  price?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  address?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @IsUrl()
+  image?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsArray()
+  gallery?: string[];
+
+  @ApiProperty()
+  @IsOptional()
+  @IsArray()
+  features?: string[];
+
+  @ApiProperty()
+  @IsOptional()
+  @IsArray()
+  amenities?: string[];
 }

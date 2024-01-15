@@ -25,8 +25,9 @@ export class PropertyService {
 
   update(updatePropertyDto: UpdatePropertyDto) {
     return this.propertyModel.findByIdAndUpdate(
-      updatePropertyDto.id,
-      updatePropertyDto
+      updatePropertyDto._id,
+      updatePropertyDto,
+      {new: true}
     );
   }
 

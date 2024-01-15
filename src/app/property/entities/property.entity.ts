@@ -1,12 +1,15 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {HydratedDocument} from 'mongoose';
+import {HydratedDocument, now} from 'mongoose';
 
 export type PropertyDocument = HydratedDocument<Property>;
 
-@Schema({versionKey: false})
+@Schema({versionKey: false, timestamps: true})
 export class Property {
   @Prop()
   title: string;
+
+  @Prop()
+  size: number;
 
   @Prop()
   price: string;
@@ -28,6 +31,12 @@ export class Property {
 
   @Prop()
   amenities: string[];
+
+  @Prop({default: now()})
+  createdAt: Date;
+
+  @Prop({default: now()})
+  updatedAt: Date;
 }
 
 export const PropertySchema = SchemaFactory.createForClass(Property);

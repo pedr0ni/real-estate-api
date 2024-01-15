@@ -6,14 +6,17 @@ import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 async function bootstrap() {
   const logger = new Logger('Application');
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Real Estate Api')
     .setDescription('The real estate api description')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
